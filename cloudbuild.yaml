@@ -23,12 +23,12 @@ steps:
     - 'managed'
 
 substitutions:
-    _PROJECT_ID: aible-gcp-containers-beta
-    _LOCATION: us-central1
-    _EXEC_SERVICE_NAME: aible-exec
-    _REPOSITORY: gcp
-    _VERSION: 216e458
-    _PORT: 80
+    _PROJECT_ID: 'aible-gcp-containers-beta'
+    _LOCATION: 'us-central1'
+    _EXEC_SERVICE_NAME: 'aible-exec'
+    _REPOSITORY: 'gcp'
+    _VERSION: '216e458'
+    _PORT: '80'
  
 images:
   - '${_LOCATION}-docker.pkg.dev/$_PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:${_VERSION}'
