@@ -41,6 +41,6 @@ substitutions:
     _LOCATION: 'us-central1'
     _EXEC_SERVICE_NAME: 'aible-exec'
     _REPOSITORY: 'gcp'
-    #_VERSION: '216e458'
+    _VERSION: '216e458'
     _PORT: '8000'
     _SA_EMAIL: 'aible-app-sa@aible-gcp-containers-beta.iam.gserviceaccount.com'
