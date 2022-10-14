@@ -1,0 +1,36 @@
+main:
+  params: [input]
+  steps:
+    - init:
+        assign:
+          - execUrl: ${input.execUrl}
+
+    - run:
+        call: http.post
+        args:
+          url: ${execUrl + "/v1/exec"}
+          headers:
+            Content-Type: "application/json"
+            Authorization: ${input.params.nbParameters.auth_token}
+          body:
+            nbBucket: ${input.params.nbBucket}
+            nbName: ${input.params.nbName}
+            nbLabel: ${input.params.nbLabel}
+            nbParameters: ${input.params.nbParameters}
+          timeout: 1800.0
+        result: run_response
+
+    - complete:
+        call: http.post
+        args:
+          url: ${execUrl + "/v1/exec/status"}
+          headers:
+            Content-Type: "application/json"
+            Authorization: ${input.params.nbParameters.auth_token}
+          body:
+            status: {"done": true}
+            params: ${run_response.body}
+        result: complete_response
+
+    - done:
+        return: ${complete_response}
