@@ -8,7 +8,7 @@ steps:
     args:
       - "-c"
       - |
-        gcloud workflows deploy aible-eda --source=eda.yml --location=${_LOCATION}
+        gcloud workflows deploy aible-eda --source=eda.yml --location=${_LOCATION} --service-account=${_SA_EMAIL}
   #deploy to cloud run
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -29,6 +29,9 @@ steps:
     - '--platform'
 
     - 'managed'
+    
+    - '--service-account'
+    - '${_SA_EMAIL}'
 
 options:
   logging: CLOUD_LOGGING_ONLY
@@ -40,6 +43,4 @@ substitutions:
     _REPOSITORY: 'gcp'
     _VERSION: '216e458'
     _PORT: '8000'
- 
-# images:
-#   - '${_LOCATION}-docker.pkg.dev/$_PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:${_VERSION}'
+    _SA_EMAIL: 'aible-app-sa@aible-gcp-containers-beta.iam.gserviceaccount.com'
