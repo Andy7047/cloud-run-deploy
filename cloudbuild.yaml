@@ -1,6 +1,14 @@
 steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: ['config','set','project','$_PROJECT_ID']
+
+  #deploy Deploy Workflow - EDA
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        gcloud workflows deploy aible-eda --source=eda.yml --location=${_LOCATION}
   #deploy to cloud run
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -33,5 +41,5 @@ substitutions:
     _VERSION: '216e458'
     _PORT: '80'
  
-images:
-  - '${_LOCATION}-docker.pkg.dev/$_PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:${_VERSION}'
+# images:
+#   - '${_LOCATION}-docker.pkg.dev/$_PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:${_VERSION}'
