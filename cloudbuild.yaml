@@ -39,7 +39,7 @@ substitutions:
     _EXEC_SERVICE_NAME: 'aible-exec'
     _REPOSITORY: 'gcp'
     _VERSION: '216e458'
-    _PORT: '80'
+    _PORT: '8000'
  
 # images:
 #   - '${_LOCATION}-docker.pkg.dev/$_PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:${_VERSION}'
