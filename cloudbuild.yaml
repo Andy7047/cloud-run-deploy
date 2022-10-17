@@ -19,19 +19,19 @@ steps:
     - '${_EXEC_SERVICE_NAME}'
 
     - '--image'
-
     - '${_LOCATION}-docker.pkg.dev/$_PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:${_VERSION}'
 
     - '--region'
-
     - '${_LOCATION}'
 
     - '--platform'
-
     - 'managed'
     
     - '--service-account'
     - '${_SA_EMAIL}'
+
+    - '--update-secrets'
+    - 'AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID:latest, S3Source=S3Source:latest, AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
