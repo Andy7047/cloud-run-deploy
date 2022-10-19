@@ -1,7 +1,7 @@
 steps:
 #Buidling aible-base docker image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '${_US_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/base/Dockerfile', '.']
+  args: ['build', '-t', '${_US_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME', '-t', '${_ASIA_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_ASIA_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/base/Dockerfile', '.']
 #Pushing aible-base image to US Repo
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', '${_US_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
