@@ -31,6 +31,9 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME']
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 #Substitution_Vars
 substitutions:
     _US_REPOSITORY: $LOCATION-docker.pkg.dev/$PROJECT_ID/demo-multi-region-us
