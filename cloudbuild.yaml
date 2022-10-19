@@ -37,8 +37,8 @@ options:
 
 #Substitution_Vars
 substitutions:
-    _US_REPOSITORY: ${_US_LOCATION}-docker.pkg.dev/$PROJECT_ID/demo-multi-region-us
-    _ASIA_REPOSITORY: ${_ASIA_LOCATION}-docker.pkg.dev/$PROJECT_ID/demo-multi-region-asia
+    _US_REPOSITORY: ${_US_LOCATION}-docker.pkg.dev/${PROJECT_ID}/demo-multi-region-us
+    _ASIA_REPOSITORY: ${_ASIA_LOCATION}-docker.pkg.dev/${PROJECT_ID}/demo-multi-region-asia
     _BASE_SERVICE_NAME: aible-base
     _APP_SERVICE_NAME: aible-app
     _EXEC_SERVICE_NAME: aible-exec
