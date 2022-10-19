@@ -1,35 +1,35 @@
 steps:
 #Buidling aible-base docker image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/base/Dockerfile', '.']
+  args: ['build', '-t', '$_US_LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/base/Dockerfile', '.']
 #Pushing aible-base image to US Repo
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
+  args: ['push', '$_US_LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
 
 #Pushing aible-base image to ASIA Repo
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
+  args: ['push', '$_ASIA_LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
 
 #Building aible-app docker image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/app/Dockerfile', '.']
+  args: ['build', '-t', '$_US_LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/app/Dockerfile', '.']
 #Pushing aible-app image to US Repo
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME']
+  args: ['push', '$_US_LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME']
 #Pushing aible-app image to ASIA Repo
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME']
+  args: ['push', '$_ASIA_LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME']
 
 #Building aible-exec docker image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/exec/Dockerfile', '.']
+  args: ['build', '-t', '$_US_LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/exec/Dockerfile', '.']
 #Pushing aible-exec image to US Repo
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME']
+  args: ['push', '$_US_LOCATION-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME']
 
 #Pushing aible-exec image to ASIA Repo
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME']
+  args: ['push', '$_ASIA_LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME']
 
 options:
   logging: CLOUD_LOGGING_ONLY
@@ -43,3 +43,5 @@ substitutions:
     _APP_SERVICE_NAME: aible-app
     _EXEC_SERVICE_NAME: aible-exec
     _TAG: $TAG_NAME
+    _US_LOCATION: us
+    _ASIA_LOCATION: asia
