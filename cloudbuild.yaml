@@ -45,3 +45,4 @@ substitutions:
     _TAG: $TAG_NAME
     _US_LOCATION: us
     _ASIA_LOCATION: asia
+    PROJECT_ID: aible-gcp-containers-beta
