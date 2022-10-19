@@ -45,6 +45,3 @@ substitutions:
     _TAG: $TAG_NAME
     _US_LOCATION: us
     _ASIA_LOCATION: asia
-
-
-    us-docker.pkg.dev/aible-gcp-containers-beta/demo-multi-region-us
