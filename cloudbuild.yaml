@@ -30,6 +30,8 @@ steps:
 #Pushing aible-exec image to ASIA Repo
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME']
+options:
+  logging: CLOUD_LOGGING_ONLY
 
 options:
   logging: CLOUD_LOGGING_ONLY
