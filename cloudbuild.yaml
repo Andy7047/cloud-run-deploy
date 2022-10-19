@@ -4,11 +4,11 @@ steps:
   args: ['build', '-t', '${_US_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/base/Dockerfile', '.']
 #Pushing aible-base image to US Repo
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '{$_US_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
+  args: ['push', '${_US_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
 
 #Pushing aible-base image to ASIA Repo
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', '{$_ASIA_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_ASIA_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
+  args: ['push', '${_ASIA_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_ASIA_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
 
 #Building aible-app docker image
 - name: 'gcr.io/cloud-builders/docker'
