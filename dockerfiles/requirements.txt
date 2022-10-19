@@ -1,0 +1,7 @@
+# GCP portability layer requirements
+
+gunicorn==20.1.0
+smart-open[s3,gcs]==5.2.1
+fsspec[gs]==2022.3.0
+google-cloud-workflows==1.7.2
+grpcio==1.43.0

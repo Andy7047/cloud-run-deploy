@@ -1,46 +1,41 @@
 steps:
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['config','set','project','$_PROJECT_ID']
+#Buidling aible-base docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/base/Dockerfile', '.']
+#Pushing aible-base image to US Repo
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
 
-  #deploy Deploy Workflow - EDA
-  - name: gcr.io/cloud-builders/gcloud
-    entrypoint: bash
-    args:
-      - "-c"
-      - |
-        gcloud workflows deploy aible-eda --source=eda.yml --location=${_LOCATION} --service-account=${_SA_EMAIL}
-  #deploy to cloud run
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-    - 'run'
+#Pushing aible-base image to ASIA Repo
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_BASE_SERVICE_NAME}:$TAG_NAME']
 
-    - 'deploy'
+#Building aible-app docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/app/Dockerfile', '.']
+#Pushing aible-app image to US Repo
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME']
+#Pushing aible-app image to ASIA Repo
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_APP_SERVICE_NAME}:$TAG_NAME']
 
-    - '${_EXEC_SERVICE_NAME}'
+#Building aible-exec docker image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_US_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME', '-f', './dockerfiles/exec/Dockerfile', '.']
+#Pushing aible-exec image to US Repo
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME']
 
-    - '--image'
-    - '${_LOCATION}-docker.pkg.dev/$_PROJECT_ID/${_REPOSITORY}/${_EXEC_SERVICE_NAME}:${_VERSION}'
+#Pushing aible-exec image to ASIA Repo
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', '$LOCATION-docker.pkg.dev/$PROJECT_ID/${_ASIA_REPOSITORY}/${_EXEC_SERVICE_NAME}:$TAG_NAME']
 
-    - '--region'
-    - '${_LOCATION}'
-
-    - '--platform'
-    - 'managed'
-    
-    - '--service-account'
-    - '${_SA_EMAIL}'
-
-    - '--update-secrets'
-    - 'AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID:latest, S3Source=S3Source:latest, AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY:latest'
-
-options:
-  logging: CLOUD_LOGGING_ONLY
-
+#Substitution_Vars
 substitutions:
-    _PROJECT_ID: 'aible-gcp-containers-beta'
-    _LOCATION: 'us-central1'
-    _EXEC_SERVICE_NAME: 'aible-exec'
-    _REPOSITORY: 'gcp'
-    _VERSION: '216e458'
-    _PORT: '8000'
-    _SA_EMAIL: 'aible-app-sa@aible-gcp-containers-beta.iam.gserviceaccount.com'
+    _US_REPOSITORY: $LOCATION-docker.pkg.dev/$PROJECT_ID/demo-multi-region-us
+    _ASIA_REPOSITORY: $LOCATION-docker.pkg.dev/$PROJECT_ID/demo-multi-region-asia
+    _BASE_SERVICE_NAME: aible-base
+    _APP_SERVICE_NAME: aible-app
+    _EXEC_SERVICE_NAME: aible-exec
+    _TAG: $TAG_NAME
